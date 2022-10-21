@@ -74,7 +74,7 @@ namespace spider
                                 if (data2 != null)
                                 {
                                     string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                    get(b,t);
+                                    get(b, t);
                                 }
 
                                 else
@@ -82,51 +82,15 @@ namespace spider
                                     string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                     get(b, t);
                                 }
-
-
                             }
                         }
-
-
-
-                        //using (HttpClient client4 = new HttpClient())
-                        //{
-                        //    //byte[] buffer = Encoding.ASCII.GetBytes(c);
-                        //    //using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(c)))
-                        //    //{
-                        //    //    using (Bitmap bm2 = new Bitmap(ms))
-                        //    //    {
-                        //    //        string pname = Guid.NewGuid().ToString() + ".Png";
-                        //    //        bm2.Save(Server.MapPath(@"C:\test" + pname));
-                        //    //    }
-                        //    //}
-
-
-                        //    byte[] buffer = Encoding.ASCII.GetBytes(c);
-                        //    //var o = client4.GetByteArrayAsync(c);
-                        //    //textBox2.Text = o.ToString();
-                        //    using (MemoryStream ms = new MemoryStream(buffer))
-                        //    {
-                        //        //Image yourImage = Image.FromStream(ms);
-                        //        using (Image yourImage = Image.FromStream(ms))
-                        //        {
-                        //            string pname = Guid.NewGuid().ToString() + ".Png";
-                        //            yourImage.Save(@"C:\test\" + pname, ImageFormat.Png);
-                        //        }
-                        //    }
-                        //}
-
-                        //}
-
-
-                        
                     }
                     MessageBox.Show("done");
                 }
             }
         }
-    
-    private async void get(string b,string t)
+
+        private async void get(string b, string t)
         {
             using (HttpClient client3 = new HttpClient())
             {
@@ -141,12 +105,52 @@ namespace spider
 
                     string c = data3.GetAttribute("src");
                     P.電影名稱MovieName = t;
-                    P.圖片雲端ImageIMDB = c;
-                    this.database.電影圖片總表MovieImages.Add(P);
-                    this.database.SaveChanges();
+                    var q = from v in this.database.電影圖片總表MovieImages
+                            where v.圖片雲端ImageIMDB == c
+                            select v;
+                    if (q == null)
+                    {
+                        P.圖片雲端ImageIMDB = c;
+                        this.database.電影圖片總表MovieImages.Add(P);
+                        this.database.SaveChanges();
+                    }
+                    else
+                        textBox2.Text += c + "已存過";
 
                 }
             }
         }
     }
 }
+
+
+//using (HttpClient client4 = new HttpClient())
+//{
+//    //byte[] buffer = Encoding.ASCII.GetBytes(c);
+//    //using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(c)))
+//    //{
+//    //    using (Bitmap bm2 = new Bitmap(ms))
+//    //    {
+//    //        string pname = Guid.NewGuid().ToString() + ".Png";
+//    //        bm2.Save(Server.MapPath(@"C:\test" + pname));
+//    //    }
+//    //}
+
+
+//    byte[] buffer = Encoding.ASCII.GetBytes(c);
+//    //var o = client4.GetByteArrayAsync(c);
+//    //textBox2.Text = o.ToString();
+//    using (MemoryStream ms = new MemoryStream(buffer))
+//    {
+//        //Image yourImage = Image.FromStream(ms);
+//        using (Image yourImage = Image.FromStream(ms))
+//        {
+//            string pname = Guid.NewGuid().ToString() + ".Png";
+//            yourImage.Save(@"C:\test\" + pname, ImageFormat.Png);
+//        }
+//    }
+//}
+
+//}
+
+

@@ -5,6 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MDAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="電影Movies">
+          <Key>
+            <PropertyRef Name="電影編號Movie_ID" />
+          </Key>
+          <Property Name="電影編號Movie_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="系列編號Series_ID" Type="int" />
+          <Property Name="中文標題Title_Cht" Type="nvarchar" MaxLength="50" />
+          <Property Name="英文標題Title_Eng" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="上映年份Release_Year" Type="int" Nullable="false" />
+          <Property Name="上映日期Release_Date" Type="nvarchar(max)" />
+          <Property Name="片長Runtime" Type="int" />
+          <Property Name="電影分級編號Rating_ID" Type="int" Nullable="false" />
+          <Property Name="評分Rate" Type="numeric" Precision="2" Scale="1" />
+          <Property Name="期待度anticipation" Type="numeric" Precision="2" Scale="1" />
+          <Property Name="票房BoxOffice" Type="nvarchar" MaxLength="50" />
+          <Property Name="劇情大綱Plot" Type="nvarchar(max)" />
+          <Property Name="預告片Trailer" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="電影排行MovieRank">
           <Key>
             <PropertyRef Name="排行編號Rank_ID" />
@@ -25,6 +43,7 @@
           <Property Name="屏蔽Invisible" Type="int" />
         </EntityType>
         <EntityContainer Name="MDAModelStoreContainer">
+          <EntitySet Name="電影Movies" EntityType="Self.電影Movies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="電影排行MovieRank" EntityType="Self.電影排行MovieRank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="電影圖片總表MovieImages" EntityType="Self.電影圖片總表MovieImages" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -35,6 +54,7 @@
         <EntityContainer Name="MDAEntities1" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="電影排行MovieRank" EntityType="MDAModel.電影排行MovieRank" />
           <EntitySet Name="電影圖片總表MovieImages" EntityType="MDAModel.電影圖片總表MovieImages" />
+          <EntitySet Name="電影Movies" EntityType="MDAModel.電影Movies" />
         </EntityContainer>
         <EntityType Name="電影排行MovieRank">
           <Key>
@@ -54,6 +74,24 @@
           <Property Name="圖片類型ImageType" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
           <Property Name="電影名稱MovieName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="屏蔽Invisible" Type="Int32" />
+        </EntityType>
+        <EntityType Name="電影Movies">
+          <Key>
+            <PropertyRef Name="電影編號Movie_ID" />
+          </Key>
+          <Property Name="電影編號Movie_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="系列編號Series_ID" Type="Int32" />
+          <Property Name="中文標題Title_Cht" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="英文標題Title_Eng" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="上映年份Release_Year" Type="Int32" Nullable="false" />
+          <Property Name="上映日期Release_Date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="片長Runtime" Type="Int32" />
+          <Property Name="電影分級編號Rating_ID" Type="Int32" Nullable="false" />
+          <Property Name="評分Rate" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="期待度anticipation" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="票房BoxOffice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="劇情大綱Plot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="預告片Trailer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -79,6 +117,25 @@
                 <ScalarProperty Name="圖片雲端ImageIMDB" ColumnName="圖片雲端ImageIMDB" />
                 <ScalarProperty Name="圖片Image" ColumnName="圖片Image" />
                 <ScalarProperty Name="圖片編號Image_ID" ColumnName="圖片編號Image_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="電影Movies">
+            <EntityTypeMapping TypeName="MDAModel.電影Movies">
+              <MappingFragment StoreEntitySet="電影Movies">
+                <ScalarProperty Name="預告片Trailer" ColumnName="預告片Trailer" />
+                <ScalarProperty Name="劇情大綱Plot" ColumnName="劇情大綱Plot" />
+                <ScalarProperty Name="票房BoxOffice" ColumnName="票房BoxOffice" />
+                <ScalarProperty Name="期待度anticipation" ColumnName="期待度anticipation" />
+                <ScalarProperty Name="評分Rate" ColumnName="評分Rate" />
+                <ScalarProperty Name="電影分級編號Rating_ID" ColumnName="電影分級編號Rating_ID" />
+                <ScalarProperty Name="片長Runtime" ColumnName="片長Runtime" />
+                <ScalarProperty Name="上映日期Release_Date" ColumnName="上映日期Release_Date" />
+                <ScalarProperty Name="上映年份Release_Year" ColumnName="上映年份Release_Year" />
+                <ScalarProperty Name="英文標題Title_Eng" ColumnName="英文標題Title_Eng" />
+                <ScalarProperty Name="中文標題Title_Cht" ColumnName="中文標題Title_Cht" />
+                <ScalarProperty Name="系列編號Series_ID" ColumnName="系列編號Series_ID" />
+                <ScalarProperty Name="電影編號Movie_ID" ColumnName="電影編號Movie_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
