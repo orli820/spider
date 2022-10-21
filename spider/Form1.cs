@@ -18,7 +18,7 @@ namespace spider
     public partial class Form1 : Form
     {
         MDAEntities1 database = new MDAEntities1();
-        電影排名MovieRank R = new 電影排名MovieRank();
+        電影排行MovieRank R = new 電影排行MovieRank();
         public Form1()
         {
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace spider
                         //label1.Text += rank + ",";
                         R.電影排名Movie_Rank = rank;
                         R.電影Movie = movie;
-                        this.database.電影排名MovieRank.Add(R);
+                        this.database.電影排行MovieRank.Add(R);
                         this.database.SaveChanges();
                     }                  
                 }

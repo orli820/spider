@@ -12,7 +12,7 @@ namespace spider
     using System;
     using System.Collections.Generic;
     
-    public partial class 電影排名MovieRank
+    public partial class 電影排行MovieRank
     {
         public int 排行編號Rank_ID { get; set; }
         public string 電影Movie { get; set; }

@@ -16,9 +16,9 @@ namespace spider
     {
         public int 圖片編號Image_ID { get; set; }
         public string 圖片Image { get; set; }
-        public Nullable<int> 屏蔽Invisible { get; set; }
         public string 圖片雲端ImageIMDB { get; set; }
         public string 圖片類型ImageType { get; set; }
-        public string 電影名稱 { get; set; }
+        public string 電影名稱MovieName { get; set; }
+        public Nullable<int> 屏蔽Invisible { get; set; }
     }
 }

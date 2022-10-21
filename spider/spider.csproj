@@ -125,7 +125,7 @@
     <Compile Include="電影圖片總表MovieImages.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="電影排名MovieRank.cs">
+    <Compile Include="電影排行MovieRank.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">

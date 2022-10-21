@@ -140,7 +140,7 @@ namespace spider
                     var data3 = document3.QuerySelector("#__next > main > div.ipc-page-content-container.ipc-page-content-container--full.sc-6eab0fb3-0.fkOMyK > div.sc-92eff7c6-1.gHPZBs.media-viewer > div:nth-child(4) > img");
 
                     string c = data3.GetAttribute("src");
-                    P.電影名稱 = t;
+                    P.電影名稱MovieName = t;
                     P.圖片雲端ImageIMDB = c;
                     this.database.電影圖片總表MovieImages.Add(P);
                     this.database.SaveChanges();
