@@ -25,7 +25,7 @@ namespace spider
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<電影排名MovieRank> 電影排名MovieRank { get; set; }
         public virtual DbSet<電影圖片總表MovieImages> 電影圖片總表MovieImages { get; set; }
+        public virtual DbSet<電影排名MovieRank> 電影排名MovieRank { get; set; }
     }
 }

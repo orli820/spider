@@ -14,8 +14,8 @@ namespace spider
     
     public partial class 電影排名MovieRank
     {
-        public int 編號 { get; set; }
+        public int 排行編號Rank_ID { get; set; }
         public string 電影Movie { get; set; }
-        public string 排名Rank { get; set; }
+        public string 電影排名Movie_Rank { get; set; }
     }
 }

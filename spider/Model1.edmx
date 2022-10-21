@@ -7,11 +7,11 @@
     <Schema Namespace="MDAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="電影排名MovieRank">
           <Key>
-            <PropertyRef Name="編號" />
+            <PropertyRef Name="排行編號Rank_ID" />
           </Key>
-          <Property Name="編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="電影Movie" Type="nvarchar" MaxLength="10" />
-          <Property Name="排名Rank" Type="nvarchar" MaxLength="100" />
+          <Property Name="排行編號Rank_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="電影Movie" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="電影排名Movie_Rank" Type="nvarchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="電影圖片總表MovieImages">
           <Key>
@@ -19,7 +19,10 @@
           </Key>
           <Property Name="圖片編號Image_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="圖片Image" Type="nvarchar" MaxLength="200" />
-          <Property Name="屏蔽Invisible" Type="int" Nullable="false" />
+          <Property Name="圖片雲端ImageIMDB" Type="nvarchar" MaxLength="200" />
+          <Property Name="圖片類型ImageType" Type="nvarchar" MaxLength="10" />
+          <Property Name="電影名稱" Type="nvarchar" MaxLength="200" />
+          <Property Name="屏蔽Invisible" Type="int" />
         </EntityType>
         <EntityContainer Name="MDAModelStoreContainer">
           <EntitySet Name="電影排名MovieRank" EntityType="Self.電影排名MovieRank" Schema="dbo" store:Type="Tables" />
@@ -30,24 +33,27 @@
     <edmx:ConceptualModels>
       <Schema Namespace="MDAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="MDAEntities1" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="電影排名MovieRank" EntityType="MDAModel.電影排名MovieRank" />
           <EntitySet Name="電影圖片總表MovieImages" EntityType="MDAModel.電影圖片總表MovieImages" />
+          <EntitySet Name="電影排名MovieRank" EntityType="MDAModel.電影排名MovieRank" />
         </EntityContainer>
-        <EntityType Name="電影排名MovieRank">
-          <Key>
-            <PropertyRef Name="編號" />
-          </Key>
-          <Property Name="編號" Type="Int32" Nullable="false" />
-          <Property Name="電影Movie" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="排名Rank" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="電影圖片總表MovieImages">
           <Key>
             <PropertyRef Name="圖片編號Image_ID" />
           </Key>
           <Property Name="圖片編號Image_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="圖片Image" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="屏蔽Invisible" Type="Int32" Nullable="false" />
+          <Property Name="屏蔽Invisible" Type="Int32" />
+          <Property Name="圖片雲端ImageIMDB" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="圖片類型ImageType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="電影名稱" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="電影排名MovieRank">
+          <Key>
+            <PropertyRef Name="排行編號Rank_ID" />
+          </Key>
+          <Property Name="排行編號Rank_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="電影Movie" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="電影排名Movie_Rank" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -55,21 +61,24 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MDAModelStoreContainer" CdmEntityContainer="MDAEntities1" >
-          <EntitySetMapping Name="電影排名MovieRank">
-            <EntityTypeMapping TypeName="MDAModel.電影排名MovieRank">
-              <MappingFragment StoreEntitySet="電影排名MovieRank">
-                <ScalarProperty Name="排名Rank" ColumnName="排名Rank" />
-                <ScalarProperty Name="電影Movie" ColumnName="電影Movie" />
-                <ScalarProperty Name="編號" ColumnName="編號" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="電影圖片總表MovieImages">
             <EntityTypeMapping TypeName="MDAModel.電影圖片總表MovieImages">
               <MappingFragment StoreEntitySet="電影圖片總表MovieImages">
+                <ScalarProperty Name="電影名稱" ColumnName="電影名稱" />
+                <ScalarProperty Name="圖片類型ImageType" ColumnName="圖片類型ImageType" />
+                <ScalarProperty Name="圖片雲端ImageIMDB" ColumnName="圖片雲端ImageIMDB" />
                 <ScalarProperty Name="屏蔽Invisible" ColumnName="屏蔽Invisible" />
                 <ScalarProperty Name="圖片Image" ColumnName="圖片Image" />
                 <ScalarProperty Name="圖片編號Image_ID" ColumnName="圖片編號Image_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="電影排名MovieRank">
+            <EntityTypeMapping TypeName="MDAModel.電影排名MovieRank">
+              <MappingFragment StoreEntitySet="電影排名MovieRank">
+                <ScalarProperty Name="電影排名Movie_Rank" ColumnName="電影排名Movie_Rank" />
+                <ScalarProperty Name="電影Movie" ColumnName="電影Movie" />
+                <ScalarProperty Name="排行編號Rank_ID" ColumnName="排行編號Rank_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

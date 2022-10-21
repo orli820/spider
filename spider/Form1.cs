@@ -43,7 +43,7 @@ namespace spider
                     if (rank != "" && movie != "")
                     {
                         //label1.Text += rank + ",";
-                        R.排名Rank = rank;
+                        R.電影排名Movie_Rank = rank;
                         R.電影Movie = movie;
                         this.database.電影排名MovieRank.Add(R);
                         this.database.SaveChanges();
