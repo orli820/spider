@@ -16,6 +16,7 @@ namespace spider
     {
         public int 排行編號Rank_ID { get; set; }
         public string 電影Movie { get; set; }
-        public string 電影排名Movie_Rank { get; set; }
+        public string 電影英Movie_En { get; set; }
+        public string 電影排行Movie_Rank { get; set; }
     }
 }

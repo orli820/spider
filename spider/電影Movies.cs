@@ -20,7 +20,7 @@ namespace spider
         public string 英文標題Title_Eng { get; set; }
         public int 上映年份Release_Year { get; set; }
         public string 上映日期Release_Date { get; set; }
-        public Nullable<int> 片長Runtime { get; set; }
+        public int 片長Runtime { get; set; }
         public int 電影分級編號Rating_ID { get; set; }
         public Nullable<decimal> 評分Rate { get; set; }
         public Nullable<decimal> 期待度anticipation { get; set; }
