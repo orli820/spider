@@ -26,7 +26,7 @@ namespace spider
         }
     
         public virtual DbSet<電影圖片總表MovieImages> 電影圖片總表MovieImages { get; set; }
-        public virtual DbSet<電影Movies> 電影Movies { get; set; }
         public virtual DbSet<電影排行MovieRank> 電影排行MovieRank { get; set; }
+        public virtual DbSet<電影Movies> 電影Movies { get; set; }
     }
 }

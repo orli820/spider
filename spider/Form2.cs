@@ -33,7 +33,7 @@ namespace spider
 
             using (HttpClient client = new HttpClient())
             {
-                string url = "https://www.imdb.com/chart/boxoffice/?ref_=hm_cht_sm";
+                string url = "https://www.imdb.com/chart/boxoffice/";
                 List<string> list = new List<string>();
                 List<string> list2 = new List<string>();
 
@@ -103,20 +103,20 @@ namespace spider
                     var document3 = parser3.ParseDocument(ress);
                     var data3 = document3.QuerySelector("#__next > main > div.ipc-page-content-container.ipc-page-content-container--full.sc-6eab0fb3-0.fkOMyK > div.sc-92eff7c6-1.gHPZBs.media-viewer > div:nth-child(4) > img");
 
-                    string c = data3.GetAttribute("src");
+                    string c = data3.GetAttribute("src");                  
+               
                     P.電影名稱MovieName = t;
                     var q = from v in this.database.電影圖片總表MovieImages
                             where v.圖片雲端ImageIMDB == c
-                            select v;
-                    if (q == null)
+                            select v.圖片雲端ImageIMDB;                   
+                    if (q.Count() == 0)
                     {
                         P.圖片雲端ImageIMDB = c;
                         this.database.電影圖片總表MovieImages.Add(P);
                         this.database.SaveChanges();
                     }
                     else
-                        textBox2.Text += c + "已存過";
-
+                                textBox2.Text += c + "已存過";
                 }
             }
         }

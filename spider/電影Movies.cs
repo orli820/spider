@@ -19,9 +19,9 @@ namespace spider
         public string 中文標題Title_Cht { get; set; }
         public string 英文標題Title_Eng { get; set; }
         public int 上映年份Release_Year { get; set; }
-        public string 上映日期Release_Date { get; set; }
+        public Nullable<System.DateTime> 上映日期Release_Date { get; set; }
         public int 片長Runtime { get; set; }
-        public int 電影分級編號Rating_ID { get; set; }
+        public Nullable<int> 電影分級編號Rating_ID { get; set; }
         public Nullable<decimal> 評分Rate { get; set; }
         public Nullable<decimal> 期待度anticipation { get; set; }
         public string 票房BoxOffice { get; set; }
