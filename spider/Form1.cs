@@ -73,7 +73,7 @@ namespace spider
                     {
                         //label1.Text += rank + ",";
                         R.電影英Movie_En = entitle;
-                        R.電影排行Movie_Rank = rank;
+                        R.電影排名Movie_Rank = rank;
                         R.電影Movie = movie;
                         this.database.電影排行MovieRank.Add(R);
                         this.database.SaveChanges();

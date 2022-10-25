@@ -90,11 +90,14 @@ namespace spider
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
 
-                                            else
+                                            else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
+                                            else
+                                                textBox1.Text = chtitle + "沒有圖片";
+                                            
 
                                         }
                                         else
@@ -106,11 +109,13 @@ namespace spider
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
 
-                                            else
+                                            else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
+                                            else
+                                                textBox1.Text = chtitle + "沒有圖片";    
                                         }
                                     }
                                     //抓片長第二格
@@ -127,12 +132,14 @@ namespace spider
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
-
-                                            else
+                                            else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
+                                            else
+                                                textBox1.Text = chtitle + "沒有圖片";
+                                           
 
                                         }
                                         else
@@ -144,11 +151,13 @@ namespace spider
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
 
-                                            else
+                                            else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
+                                            else
+                                                textBox1.Text = chtitle + "沒有圖片";
                                         }
                                     }
 
@@ -174,11 +183,13 @@ namespace spider
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
 
-                                            else
+                                            else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
+                                            else
+                                                textBox1.Text = chtitle + "沒有圖片";
 
                                         }
                                         else
@@ -190,11 +201,13 @@ namespace spider
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
 
-                                            else
+                                            else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
+                                            else
+                                                textBox1.Text = chtitle + "沒有圖片";
                                         }
                                     }
                                     //抓片長第二格
@@ -211,11 +224,13 @@ namespace spider
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
 
-                                            else
+                                            else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
+                                            else
+                                                textBox1.Text = chtitle + "沒有圖片";
 
 
                                         }
@@ -234,11 +249,13 @@ namespace spider
                                                     get(b, chtitle, entitle, time, runyear);
                                                 }
 
-                                                else
+                                                else if (data0 != null)
                                                 {
                                                     string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                     get(b, chtitle, entitle, time, runyear);
                                                 }
+                                                else
+                                                    textBox1.Text = chtitle + "沒有圖片";
                                             }
                                             else
                                             {
@@ -252,11 +269,13 @@ namespace spider
                                                         get(b, chtitle, entitle, time, runyear);
                                                     }
 
-                                                    else
+                                                    else if (data0 != null)
                                                     {
                                                         string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                         get(b, chtitle, entitle, time, runyear);
                                                     }
+                                                    else
+                                                        textBox1.Text = chtitle + "沒有圖片";
 
                                                 }
                                                 else
@@ -268,11 +287,13 @@ namespace spider
                                                         get(b, chtitle, entitle, time, runyear);
                                                     }
 
-                                                    else
+                                                    else if (data0 != null)
                                                     {
                                                         string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                         get(b, chtitle, entitle, time, runyear);
                                                     }
+                                                    else
+                                                       textBox1.Text = chtitle + "沒有圖片";
                                                 }
                                             }
                                         }

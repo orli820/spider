@@ -24,7 +24,7 @@ namespace spider
         public Nullable<int> 電影分級編號Rating_ID { get; set; }
         public Nullable<decimal> 評分Rate { get; set; }
         public Nullable<decimal> 期待度anticipation { get; set; }
-        public string 票房BoxOffice { get; set; }
+        public Nullable<double> 票房BoxOffice { get; set; }
         public string 劇情大綱Plot { get; set; }
         public string 預告片Trailer { get; set; }
     }

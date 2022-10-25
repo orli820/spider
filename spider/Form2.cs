@@ -116,7 +116,7 @@ namespace spider
                         this.database.SaveChanges();
                     }
                     else
-                                textBox2.Text += c + "已存過";
+                                textBox2.Text += t + "已存過";
                 }
             }
         }
