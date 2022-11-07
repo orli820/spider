@@ -358,6 +358,8 @@ namespace spider
                         var q3 = from d in database.電影Movies where d.中文標題Title_Cht == entitle select d;
                         var q4 = from f in database.電影Movies where f.英文標題Title_Eng == entitle select f;
                         var q6 = from m in database.導演總表Director where m.導演英文名字Name_Eng == director select m;
+                        
+                        //雲端圖片
                         if (q.Count() == 0 && q5.Count() == 0)
                         {
                             R.圖片雲端ImageIMDB = c;
@@ -366,8 +368,9 @@ namespace spider
                             this.database.SaveChanges();
                         }
                         else
-
                             textBox2.Text += chtitle + "圖片已存過";
+
+                        //電影
                         if (q2.Count() == 0 )
                         {
                             if (q3.Count() != 0 || q4.Count() != 0)
@@ -384,59 +387,37 @@ namespace spider
                             this.database.SaveChanges();
                             textBox1.Text += chtitle + "已存入";
 
-                            var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
-                            var img = (from a1 in database.電影圖片總表MovieImages where a1.圖片雲端ImageIMDB == c select a1.圖片編號Image_ID).First();
-                            R2.圖片編號Image_ID = img;
-                            R2.電影編號Movie_ID = movie;
-                            this.database.電影圖片MovieIImagesList.Add(R2);
-                            this.database.SaveChanges();
-                            textBox1.Text += "電影圖片加入成功";
-
-                            if (q6.Count() == 0)
-                            {
-
-                                D.導演英文名字Name_Eng = director;
-                                this.database.導演總表Director.Add(D);
-                                this.database.SaveChanges();
-
-                                var j = (from d in database.導演總表Director where d.導演英文名字Name_Eng == director select d.導演編號Director_ID).First();
-                                D2.導演編號Director_ID = j;
-                                D2.電影編號Movie_ID = movie;
-                                this.database.電影導演MovieDirector.Add(D2);
-                                this.database.SaveChanges();
-                            }
-                            else if (q6.Count() != 0)
-                            {
-                                var p = (from i in q6 select i.導演編號Director_ID).First();
-                                D2.導演編號Director_ID = p;
-                                D2.電影編號Movie_ID = movie;
-                                this.database.電影導演MovieDirector.Add(D2);
-                                this.database.SaveChanges();
-                            }
+                            //var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
+                            //var img = (from a1 in database.電影圖片總表MovieImages where a1.圖片雲端ImageIMDB == c select a1.圖片編號Image_ID).First();
+                            //R2.圖片編號Image_ID = img;
+                            //R2.電影編號Movie_ID = movie;
+                            //this.database.電影圖片MovieIImagesList.Add(R2);
+                            //this.database.SaveChanges();
+                            //textBox1.Text += "電影圖片加入成功";
                         }
                         else
-
                             textBox2.Text += chtitle + "電影已存過";
+
+                        //導演
                         if (q6.Count() == 0)
                         {
 
                             D.導演英文名字Name_Eng = director;
                             this.database.導演總表Director.Add(D);
                             this.database.SaveChanges();
-
-                            var j = (from d in database.導演總表Director where d.導演英文名字Name_Eng == director select d.導演編號Director_ID).First();
-                            var jj = (from i in q2 select i.電影編號Movie_ID).First();
-                            D2.導演編號Director_ID = j;
-                            D2.電影編號Movie_ID = jj;
-                            this.database.電影導演MovieDirector.Add(D2);
-                            this.database.SaveChanges();
+                            //var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
+                            //var j = (from d in database.導演總表Director where d.導演英文名字Name_Eng == director select d.導演編號Director_ID).First();
+                            //D2.導演編號Director_ID = j;
+                            //D2.電影編號Movie_ID = movie;
+                            //this.database.電影導演MovieDirector.Add(D2);
+                            //this.database.SaveChanges();
                         }
                         else if (q6.Count() != 0)
                         {
+                            var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
                             var p = (from i in q6 select i.導演編號Director_ID).First();
                             D2.導演編號Director_ID = p;
-                            var jj = (from i in q2 select i.電影編號Movie_ID).First();
-                            D2.電影編號Movie_ID = jj;
+                            D2.電影編號Movie_ID = movie;
                             this.database.電影導演MovieDirector.Add(D2);
                             this.database.SaveChanges();
                         }
@@ -450,6 +431,7 @@ namespace spider
                         var q3 = from d in database.電影Movies where d.中文標題Title_Cht == entitle select d;
                         var q4 = from f in database.電影Movies where f.英文標題Title_Eng == entitle select f;
                         var q6 = from m in database.導演總表Director where m.導演英文名字Name_Eng == director select m;
+                        //圖片
                         if (q.Count() == 0 && q5.Count() == 0)
                         {
                             R.圖片雲端ImageIMDB = c;
@@ -458,8 +440,9 @@ namespace spider
                             this.database.SaveChanges();
                         }
                         else
-
                             textBox2.Text += chtitle + "圖片已存過";
+
+                        //電影
                         if (q2.Count() == 0 )
                         {
                             if (q3.Count() != 0 || q4.Count() != 0)
@@ -477,62 +460,42 @@ namespace spider
                             this.database.SaveChanges();
                             textBox1.Text += chtitle + "已存入";
 
-                           var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
-                            var img = (from a1 in database.電影圖片總表MovieImages where a1.圖片雲端ImageIMDB == c select a1.圖片編號Image_ID).First();
-                            R2.圖片編號Image_ID = img;
-                            R2.電影編號Movie_ID = movie;
-                            this.database.電影圖片MovieIImagesList.Add(R2);
-                            this.database.SaveChanges();
-                            textBox1.Text += "電影圖片加入成功";
-
-                            if (q6.Count() == 0)
-                            {
-
-                                D.導演英文名字Name_Eng = director;
-                                this.database.導演總表Director.Add(D);
-                                this.database.SaveChanges();
-
-                                var j = (from d in database.導演總表Director where d.導演英文名字Name_Eng == director select d.導演編號Director_ID).First();
-                                D2.導演編號Director_ID = j;
-                                D2.電影編號Movie_ID = movie;
-                                this.database.電影導演MovieDirector.Add(D2);
-                                this.database.SaveChanges();
-                            }
-                            else if (q6.Count() != 0)
-                            {
-                                var p = (from i in q6 select i.導演編號Director_ID).First();
-                                D2.導演編號Director_ID = p;
-                                D2.電影編號Movie_ID = movie;
-                                this.database.電影導演MovieDirector.Add(D2);
-                                this.database.SaveChanges();
-                            }
+                           //var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
+                           // var img = (from a1 in database.電影圖片總表MovieImages where a1.圖片雲端ImageIMDB == c select a1.圖片編號Image_ID).First();
+                           // R2.圖片編號Image_ID = img;
+                           // R2.電影編號Movie_ID = movie;
+                           // this.database.電影圖片MovieIImagesList.Add(R2);
+                           // this.database.SaveChanges();
+                           // textBox1.Text += "電影圖片加入成功";
                         }
                         else
                             textBox2.Text += chtitle + "電影已存過";
+
+                        //導演
                         if (q6.Count() == 0)
                         {
 
                             D.導演英文名字Name_Eng = director;
                             this.database.導演總表Director.Add(D);
                             this.database.SaveChanges();
-
-                            var j = (from d in database.導演總表Director where d.導演英文名字Name_Eng == director select d.導演編號Director_ID).First();
-                            var jj = (from i in q2 select i.電影編號Movie_ID).First();
-                            D2.導演編號Director_ID = j;
-                            D2.電影編號Movie_ID = jj;
-                            this.database.電影導演MovieDirector.Add(D2);
-                            this.database.SaveChanges();
+                        //    var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
+                        //    var j = (from d in database.導演總表Director where d.導演英文名字Name_Eng == director select d.導演編號Director_ID).First();
+                        //    D2.導演編號Director_ID = j;
+                        //    D2.電影編號Movie_ID = movie;
+                        //    this.database.電影導演MovieDirector.Add(D2);
+                        //    this.database.SaveChanges();
                         }
                         else if (q6.Count() != 0)
                         {
+                            var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
                             var p = (from i in q6 select i.導演編號Director_ID).First();
                             D2.導演編號Director_ID = p;
-                            var jj = (from i in q2 select i.電影編號Movie_ID).First();
-                            D2.電影編號Movie_ID = jj;
+                            D2.電影編號Movie_ID = movie;
                             this.database.電影導演MovieDirector.Add(D2);
                             this.database.SaveChanges();
                         }
-                        
+
+
                     }
 
 
