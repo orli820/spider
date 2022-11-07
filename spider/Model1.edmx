@@ -36,6 +36,14 @@
           <Property Name="周次Weeks" Type="nvarchar" MaxLength="50" />
           <Property Name="統計時間" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="電影圖片MovieIImagesList">
+          <Key>
+            <PropertyRef Name="電影圖片編號MI_ID" />
+          </Key>
+          <Property Name="電影圖片編號MI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="電影編號Movie_ID" Type="int" Nullable="false" />
+          <Property Name="圖片編號Image_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="電影圖片總表MovieImages">
           <Key>
             <PropertyRef Name="圖片編號Image_ID" />
@@ -47,10 +55,43 @@
           <Property Name="電影名稱MovieName" Type="nvarchar" MaxLength="100" />
           <Property Name="屏蔽Invisible" Type="int" />
         </EntityType>
+        <Association Name="FK_電影圖片MovieIImages_圖片總表Images">
+          <End Role="電影圖片總表MovieImages" Type="Self.電影圖片總表MovieImages" Multiplicity="1" />
+          <End Role="電影圖片MovieIImagesList" Type="Self.電影圖片MovieIImagesList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="電影圖片總表MovieImages">
+              <PropertyRef Name="圖片編號Image_ID" />
+            </Principal>
+            <Dependent Role="電影圖片MovieIImagesList">
+              <PropertyRef Name="圖片編號Image_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_電影圖片MovieIImagesList_電影Movies">
+          <End Role="電影Movies" Type="Self.電影Movies" Multiplicity="1" />
+          <End Role="電影圖片MovieIImagesList" Type="Self.電影圖片MovieIImagesList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="電影Movies">
+              <PropertyRef Name="電影編號Movie_ID" />
+            </Principal>
+            <Dependent Role="電影圖片MovieIImagesList">
+              <PropertyRef Name="電影編號Movie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MDAModelStoreContainer">
           <EntitySet Name="電影Movies" EntityType="Self.電影Movies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="電影排行MovieRank" EntityType="Self.電影排行MovieRank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="電影圖片MovieIImagesList" EntityType="Self.電影圖片MovieIImagesList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="電影圖片總表MovieImages" EntityType="Self.電影圖片總表MovieImages" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_電影圖片MovieIImages_圖片總表Images" Association="Self.FK_電影圖片MovieIImages_圖片總表Images">
+            <End Role="電影圖片總表MovieImages" EntitySet="電影圖片總表MovieImages" />
+            <End Role="電影圖片MovieIImagesList" EntitySet="電影圖片MovieIImagesList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_電影圖片MovieIImagesList_電影Movies" Association="Self.FK_電影圖片MovieIImagesList_電影Movies">
+            <End Role="電影Movies" EntitySet="電影Movies" />
+            <End Role="電影圖片MovieIImagesList" EntitySet="電影圖片MovieIImagesList" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -60,6 +101,15 @@
           <EntitySet Name="電影圖片總表MovieImages" EntityType="MDAModel.電影圖片總表MovieImages" />
           <EntitySet Name="電影Movies" EntityType="MDAModel.電影Movies" />
           <EntitySet Name="電影排行MovieRank" EntityType="MDAModel.電影排行MovieRank" />
+          <EntitySet Name="電影圖片MovieIImagesList" EntityType="MDAModel.電影圖片MovieIImagesList" />
+          <AssociationSet Name="FK_電影圖片MovieIImagesList_電影Movies" Association="MDAModel.FK_電影圖片MovieIImagesList_電影Movies">
+            <End Role="電影Movies" EntitySet="電影Movies" />
+            <End Role="電影圖片MovieIImagesList" EntitySet="電影圖片MovieIImagesList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_電影圖片MovieIImages_圖片總表Images" Association="MDAModel.FK_電影圖片MovieIImages_圖片總表Images">
+            <End Role="電影圖片總表MovieImages" EntitySet="電影圖片總表MovieImages" />
+            <End Role="電影圖片MovieIImagesList" EntitySet="電影圖片MovieIImagesList" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="電影圖片總表MovieImages">
           <Key>
@@ -71,6 +121,7 @@
           <Property Name="圖片類型ImageType" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
           <Property Name="電影名稱MovieName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="屏蔽Invisible" Type="Int32" />
+          <NavigationProperty Name="電影圖片MovieIImagesList" Relationship="MDAModel.FK_電影圖片MovieIImages_圖片總表Images" FromRole="電影圖片總表MovieImages" ToRole="電影圖片MovieIImagesList" />
         </EntityType>
         <EntityType Name="電影Movies">
           <Key>
@@ -89,6 +140,7 @@
           <Property Name="票房BoxOffice" Type="Double" />
           <Property Name="劇情大綱Plot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="預告片Trailer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="電影圖片MovieIImagesList" Relationship="MDAModel.FK_電影圖片MovieIImagesList_電影Movies" FromRole="電影Movies" ToRole="電影圖片MovieIImagesList" />
         </EntityType>
         <EntityType Name="電影排行MovieRank">
           <Key>
@@ -103,6 +155,40 @@
           <Property Name="周次Weeks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="統計時間" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="電影圖片MovieIImagesList">
+          <Key>
+            <PropertyRef Name="電影圖片編號MI_ID" />
+          </Key>
+          <Property Name="電影圖片編號MI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="電影編號Movie_ID" Type="Int32" Nullable="false" />
+          <Property Name="圖片編號Image_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="電影Movies" Relationship="MDAModel.FK_電影圖片MovieIImagesList_電影Movies" FromRole="電影圖片MovieIImagesList" ToRole="電影Movies" />
+          <NavigationProperty Name="電影圖片總表MovieImages" Relationship="MDAModel.FK_電影圖片MovieIImages_圖片總表Images" FromRole="電影圖片MovieIImagesList" ToRole="電影圖片總表MovieImages" />
+        </EntityType>
+        <Association Name="FK_電影圖片MovieIImagesList_電影Movies">
+          <End Type="MDAModel.電影Movies" Role="電影Movies" Multiplicity="1" />
+          <End Type="MDAModel.電影圖片MovieIImagesList" Role="電影圖片MovieIImagesList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="電影Movies">
+              <PropertyRef Name="電影編號Movie_ID" />
+            </Principal>
+            <Dependent Role="電影圖片MovieIImagesList">
+              <PropertyRef Name="電影編號Movie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_電影圖片MovieIImages_圖片總表Images">
+          <End Type="MDAModel.電影圖片總表MovieImages" Role="電影圖片總表MovieImages" Multiplicity="1" />
+          <End Type="MDAModel.電影圖片MovieIImagesList" Role="電影圖片MovieIImagesList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="電影圖片總表MovieImages">
+              <PropertyRef Name="圖片編號Image_ID" />
+            </Principal>
+            <Dependent Role="電影圖片MovieIImagesList">
+              <PropertyRef Name="圖片編號Image_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -151,6 +237,15 @@
                 <ScalarProperty Name="電影英Movie_En" ColumnName="電影英Movie_En" />
                 <ScalarProperty Name="電影Movie" ColumnName="電影Movie" />
                 <ScalarProperty Name="排行編號Rank_ID" ColumnName="排行編號Rank_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="電影圖片MovieIImagesList">
+            <EntityTypeMapping TypeName="MDAModel.電影圖片MovieIImagesList">
+              <MappingFragment StoreEntitySet="電影圖片MovieIImagesList">
+                <ScalarProperty Name="圖片編號Image_ID" ColumnName="圖片編號Image_ID" />
+                <ScalarProperty Name="電影編號Movie_ID" ColumnName="電影編號Movie_ID" />
+                <ScalarProperty Name="電影圖片編號MI_ID" ColumnName="電影圖片編號MI_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,6 +14,12 @@ namespace spider
     
     public partial class 電影Movies
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public 電影Movies()
+        {
+            this.電影圖片MovieIImagesList = new HashSet<電影圖片MovieIImagesList>();
+        }
+    
         public int 電影編號Movie_ID { get; set; }
         public Nullable<int> 系列編號Series_ID { get; set; }
         public string 中文標題Title_Cht { get; set; }
@@ -27,5 +33,8 @@ namespace spider
         public Nullable<double> 票房BoxOffice { get; set; }
         public string 劇情大綱Plot { get; set; }
         public string 預告片Trailer { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<電影圖片MovieIImagesList> 電影圖片MovieIImagesList { get; set; }
     }
 }

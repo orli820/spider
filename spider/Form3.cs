@@ -22,7 +22,7 @@ namespace spider
         MDAEntities1 database = new MDAEntities1();
         電影Movies P = new 電影Movies();
         電影圖片總表MovieImages R = new 電影圖片總表MovieImages();
-
+        電影圖片MovieIImagesList R2 = new 電影圖片MovieIImagesList();
 
         private async void button1_Click(object sender, EventArgs e)
         {
@@ -374,6 +374,13 @@ namespace spider
 
                             this.database.電影Movies.Add(P);
                             this.database.SaveChanges();
+
+                            var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
+                            var img = (from a1 in database.電影圖片總表MovieImages where a1.圖片雲端ImageIMDB == c select a1.圖片編號Image_ID).First();
+                            R2.圖片編號Image_ID = img;
+                            R2.電影編號Movie_ID = movie;
+                            this.database.電影圖片MovieIImagesList.Add(R2);
+                            this.database.SaveChanges();
                         }
                         else
 
@@ -410,6 +417,12 @@ namespace spider
                             P.評分Rate = ratestar;
 
                             this.database.電影Movies.Add(P);
+                            this.database.SaveChanges();
+                            var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
+                            var img = (from a1 in database.電影圖片總表MovieImages where a1.圖片雲端ImageIMDB == c select a1.圖片編號Image_ID).First();
+                            R2.圖片編號Image_ID = img;
+                            R2.電影編號Movie_ID = movie;
+                            this.database.電影圖片MovieIImagesList.Add(R2);
                             this.database.SaveChanges();
                         }
                         else

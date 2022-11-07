@@ -21,6 +21,8 @@ namespace spider
         MDAEntities1 database = new MDAEntities1();
         電影Movies P = new 電影Movies();
         電影圖片總表MovieImages R = new 電影圖片總表MovieImages();
+        
+
         private async void button1_Click(object sender, EventArgs e)
         {
             using (HttpClient client = new HttpClient())

@@ -14,11 +14,20 @@ namespace spider
     
     public partial class 電影圖片總表MovieImages
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public 電影圖片總表MovieImages()
+        {
+            this.電影圖片MovieIImagesList = new HashSet<電影圖片MovieIImagesList>();
+        }
+    
         public int 圖片編號Image_ID { get; set; }
         public string 圖片Image { get; set; }
         public string 圖片雲端ImageIMDB { get; set; }
         public string 圖片類型ImageType { get; set; }
         public string 電影名稱MovieName { get; set; }
         public Nullable<int> 屏蔽Invisible { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<電影圖片MovieIImagesList> 電影圖片MovieIImagesList { get; set; }
     }
 }
