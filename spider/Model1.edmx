@@ -31,6 +31,10 @@
           <Property Name="電影Movie" Type="nvarchar" MaxLength="100" />
           <Property Name="電影英Movie_En" Type="nvarchar" MaxLength="100" />
           <Property Name="電影排名Movie_Rank" Type="nvarchar" MaxLength="5" />
+          <Property Name="周末票房BoxOffice_Weekend" Type="nvarchar" MaxLength="50" />
+          <Property Name="累積票房BoxOffice_Gross" Type="nvarchar" MaxLength="50" />
+          <Property Name="周次Weeks" Type="nvarchar" MaxLength="50" />
+          <Property Name="統計時間" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="電影圖片總表MovieImages">
           <Key>
@@ -94,6 +98,10 @@
           <Property Name="電影Movie" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="電影英Movie_En" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="電影排名Movie_Rank" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="周末票房BoxOffice_Weekend" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="累積票房BoxOffice_Gross" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="周次Weeks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="統計時間" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -135,6 +143,10 @@
           <EntitySetMapping Name="電影排行MovieRank">
             <EntityTypeMapping TypeName="MDAModel.電影排行MovieRank">
               <MappingFragment StoreEntitySet="電影排行MovieRank">
+                <ScalarProperty Name="統計時間" ColumnName="統計時間" />
+                <ScalarProperty Name="周次Weeks" ColumnName="周次Weeks" />
+                <ScalarProperty Name="累積票房BoxOffice_Gross" ColumnName="累積票房BoxOffice_Gross" />
+                <ScalarProperty Name="周末票房BoxOffice_Weekend" ColumnName="周末票房BoxOffice_Weekend" />
                 <ScalarProperty Name="電影排名Movie_Rank" ColumnName="電影排名Movie_Rank" />
                 <ScalarProperty Name="電影英Movie_En" ColumnName="電影英Movie_En" />
                 <ScalarProperty Name="電影Movie" ColumnName="電影Movie" />

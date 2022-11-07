@@ -59,6 +59,7 @@ namespace spider
                             HtmlParser parser2 = new HtmlParser();
                             var document2 = parser2.ParseDocument(res);
                             var data4 = document2.QuerySelector("#content_l > div:nth-child(1) > div.l_box_inner > div > div > div.movie_intro_info_r > h3");
+
                             list2.Add(data4.InnerHtml);
                             textBox1.Text = String.Join(",", list2);
                         }

@@ -1,7 +1,7 @@
 ﻿
 namespace spider
 {
-    partial class Form4
+    partial class 最低評分
     {
         /// <summary>
         /// Required designer variable.
@@ -36,44 +36,43 @@ namespace spider
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(815, 81);
+            this.textBox2.Location = new System.Drawing.Point(819, 60);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(451, 696);
-            this.textBox2.TabIndex = 8;
+            this.textBox2.TabIndex = 11;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(307, 81);
+            this.textBox1.Location = new System.Drawing.Point(311, 60);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(451, 696);
-            this.textBox1.TabIndex = 7;
+            this.textBox1.TabIndex = 10;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(48, 96);
+            this.button1.Location = new System.Drawing.Point(52, 75);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 41);
-            this.button1.TabIndex = 6;
+            this.button1.TabIndex = 9;
             this.button1.Text = "找清單";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form4
+            // 最低評分
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1315, 859);
+            this.ClientSize = new System.Drawing.Size(1345, 1050);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Name = "Form4";
-            this.Text = "抓即將上映電影";
-            this.Load += new System.EventHandler(this.Form4_Load);
+            this.Name = "最低評分";
+            this.Text = "最低評分";
             this.ResumeLayout(false);
             this.PerformLayout();
 

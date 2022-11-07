@@ -44,9 +44,7 @@ namespace spider
                         string a = "https://www.imdb.com" + item.GetAttribute("href");
                         string[] l = a.Split('?');
                         string link = l[0].Trim();
-                        list.Add(a);
-                        //textBox1.Text = String.Join(",", a);
-
+                        list.Add(link);
                     }
 
                     foreach (var x in list)
@@ -61,17 +59,26 @@ namespace spider
                                 HtmlParser parser2 = new HtmlParser();
                                 var document2 = parser2.ParseDocument(res);
                                 var titlech = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-80d4314-1.fbQftq > h1");
+                                //中文標題
                                 var chtitle = titlech.InnerHtml;
+                                //英文標題
                                 var titleen = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-80d4314-1.fbQftq > div > div");
+                                //找時間(第三格)
                                 var runningtime = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-80d4314-1.fbQftq > div > ul > li:nth-child(3)");
+                                //找時間(第二格)
                                 var runningtime2 = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-80d4314-1.fbQftq > div > ul > li:nth-child(2)");
+                                //上映年分
                                 var year = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-80d4314-1.fbQftq > div > ul > li:nth-child(1) > a");
                                 int runyear = Convert.ToInt32(year.InnerHtml);
+                                //圖片路徑1
+                                var data0 = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-7643a8e3-2.ebKPVC > div.sc-7643a8e3-3.kvnEqz > div > div.sc-e1fa24b3-1.eydBag > div > a");
+                                //圖片路徑2
+                                var data2 = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-7643a8e3-6.bunqBa > div.sc-7643a8e3-7.hNQeVX > div > div > a");
+                                //圖片路徑3
+                                var data00 = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-7643a8e3-2.ebKPVC > div.sc-7643a8e3-3.kvnEqz > div > div.sc-e1fa24b3-1.eydBag > div > a");
 
-                                var data0 = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-2a827f80-6.jXSdID > div.sc-2a827f80-7.cOVoYS > div > div > a");
-                                var data2 = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-2a827f80-2.kqTacj > div.sc-2a827f80-3.dhWlsy > div > div.sc-77a2c808-1.gFDKno > div > a");
                                 var gety = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-80d4314-1.fbQftq > div > ul > li:nth-child(2) > a");
-                                //沒有原標
+                                //沒有原標(沒有中標)
                                 if (titleen == null)
                                 {
                                     string entitle = chtitle;
@@ -95,7 +102,7 @@ namespace spider
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
-                                            else
+                                            else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
                                             
 
@@ -114,7 +121,7 @@ namespace spider
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
-                                            else
+                                            else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";    
                                         }
                                     }
@@ -137,7 +144,7 @@ namespace spider
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
-                                            else
+                                            else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
                                            
 
@@ -156,24 +163,26 @@ namespace spider
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
-                                            else
+                                            else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
                                         }
                                     }
 
                                 }
-                                //有原標
+                                //有原標(中英都有)
                                 else
                                 {
                                     var enti = titleen.InnerHtml;
                                     string[] line = enti.Split(':');
                                     string entitle = line[1].Trim();
-                                    //抓片長第三格
+                                    //抓片長第三格是時間
                                     if (runningtime != null)
                                     {
                                         string time1 = runningtime.InnerHtml;
                                         string[] gettime = time1.Split('<', '>');
                                         int h = Convert.ToInt32(gettime[0]) * 60;
+                                        //分割成陣列看看，長度為九是片長時間
+                                        //不是時間，可能是空值
                                         if (gettime.Length != 9)
                                         {
                                             int time = h;
@@ -188,10 +197,11 @@ namespace spider
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
-                                            else
+                                            else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
 
                                         }
+                                        //時間為第三格
                                         else
                                         {
                                             int time = h + Convert.ToInt32(gettime[6]);
@@ -206,7 +216,7 @@ namespace spider
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
-                                            else
+                                            else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
                                         }
                                     }
@@ -229,7 +239,7 @@ namespace spider
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                 get(b, chtitle, entitle, time, runyear);
                                             }
-                                            else
+                                            else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
 
 
@@ -254,7 +264,7 @@ namespace spider
                                                     string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                     get(b, chtitle, entitle, time, runyear);
                                                 }
-                                                else
+                                                else if (data2 == null && data0 == null)
                                                     textBox1.Text = chtitle + "沒有圖片";
                                             }
                                             else
@@ -274,7 +284,7 @@ namespace spider
                                                         string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                         get(b, chtitle, entitle, time, runyear);
                                                     }
-                                                    else
+                                                    else if (data2 == null && data0 == null)
                                                         textBox1.Text = chtitle + "沒有圖片";
 
                                                 }
@@ -292,8 +302,8 @@ namespace spider
                                                         string b = "https://www.imdb.com" + data0.GetAttribute("href");
                                                         get(b, chtitle, entitle, time, runyear);
                                                     }
-                                                    else
-                                                       textBox1.Text = chtitle + "沒有圖片";
+                                                    else if (data2 == null && data0 == null)
+                                                        textBox1.Text = chtitle + "沒有圖片";
                                                 }
                                             }
                                         }
@@ -323,6 +333,7 @@ namespace spider
                 var responses = await client3.GetAsync(url3);
                 if (responses.IsSuccessStatusCode)
                 {
+                    //撿圖片
                     string ress = await responses.Content.ReadAsStringAsync();
                     HtmlParser parser3 = new HtmlParser();
                     var document3 = parser3.ParseDocument(ress);
@@ -333,6 +344,8 @@ namespace spider
                         string c = data3.GetAttribute("src");
                         var q = from a in database.電影圖片總表MovieImages where a.圖片雲端ImageIMDB == c select a;
                         var q2 = from z in database.電影Movies where z.中文標題Title_Cht == chtitle select z;
+                        var q3 = from d in database.電影Movies where d.中文標題Title_Cht == entitle select d;
+                        var q4 = from f in database.電影Movies where f.英文標題Title_Eng == entitle select f;
                         if (q.Count() == 0)
                         {
                             R.圖片雲端ImageIMDB = c;
@@ -343,8 +356,14 @@ namespace spider
                         else
 
                             textBox2.Text += chtitle + "圖片已存過";
-                        if (q2.Count() == 0)
+                        if (q2.Count() == 0 )
                         {
+                            if (q3.Count() != 0 || q4.Count() != 0)
+                            {
+                                MessageBox.Show(chtitle + "/" + entitle + "可能已加入");
+                                return;
+                            }
+                            
                             P.中文標題Title_Cht = chtitle;
                             P.英文標題Title_Eng = entitle;
                             P.片長Runtime = time;
@@ -362,6 +381,8 @@ namespace spider
                         string c = data4.GetAttribute("src");
                         var q = from a in database.電影圖片總表MovieImages where a.圖片雲端ImageIMDB == c select a;
                         var q2 = from z in database.電影Movies where z.中文標題Title_Cht == chtitle select z;
+                        var q3 = from d in database.電影Movies where d.中文標題Title_Cht == entitle select d;
+                        var q4 = from f in database.電影Movies where f.英文標題Title_Eng == entitle select f;
                         if (q.Count() == 0)
                         {
                             R.圖片雲端ImageIMDB = c;
@@ -372,9 +393,15 @@ namespace spider
                         else
 
                             textBox2.Text += chtitle + "圖片已存過";
-                        if (q2.Count() == 0)
+                        if (q2.Count() == 0 )
                         {
-                            P.中文標題Title_Cht = chtitle;
+                            if (q3.Count() != 0|| q4.Count()!=0)
+                            {
+                                MessageBox.Show(chtitle + "/" + entitle + "可能已加入");
+                                return;
+                            }
+                            
+                                P.中文標題Title_Cht = chtitle;
                             P.英文標題Title_Eng = entitle;
                             P.片長Runtime = time;
                             P.上映年份Release_Year = runyear;
@@ -391,6 +418,11 @@ namespace spider
 
                 }
             }
+        }
+
+        private void Form4_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

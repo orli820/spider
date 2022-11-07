@@ -12,23 +12,20 @@ using System.Windows.Forms;
 
 namespace spider
 {
-    public partial class Form3 : Form
+    public partial class 最低評分 : Form
     {
-        public Form3()
+        public 最低評分()
         {
             InitializeComponent();
         }
-
         MDAEntities1 database = new MDAEntities1();
         電影Movies P = new 電影Movies();
         電影圖片總表MovieImages R = new 電影圖片總表MovieImages();
-
-
         private async void button1_Click(object sender, EventArgs e)
         {
             using (HttpClient client = new HttpClient())
             {
-                string url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250";
+                string url = "https://www.imdb.com/calendar/?ref_=rlm&region=TW&type=MOVIE";
                 List<string> list = new List<string>();
                 List<string> listtitlech = new List<string>();
 
@@ -39,7 +36,9 @@ namespace spider
 
                     HtmlParser parser = new HtmlParser();
                     var document = parser.ParseDocument(result);
-                    var data = document.QuerySelectorAll("#main > div > span > div > div > div.lister > table > tbody > tr > td.titleColumn > a");
+                    var data = document.QuerySelectorAll("#__next > main > div > div.ipc-page-content-container.ipc-page-content-container--center > section > section > article > ul > li> div.ipc-metadata-list-summary-item__c > div.ipc-metadata-list-summary-item__tc > a");
+
+
                     foreach (var item in data)
                     {
                         string a = "https://www.imdb.com" + item.GetAttribute("href");
@@ -47,7 +46,7 @@ namespace spider
                         string link = l[0].Trim();
                         list.Add(link);
                     }
-                    textBox1.Text = String.Join(",", list);
+
                     foreach (var x in list)
                     {
                         using (HttpClient client2 = new HttpClient())
@@ -64,7 +63,6 @@ namespace spider
                                 var chtitle = titlech.InnerHtml;
                                 //英文標題
                                 var titleen = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-80d4314-1.fbQftq > div > div");
-                                
                                 //找時間(第三格)
                                 var runningtime = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-80d4314-1.fbQftq > div > ul > li:nth-child(3)");
                                 //找時間(第二格)
@@ -80,10 +78,6 @@ namespace spider
                                 var data00 = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-7643a8e3-2.ebKPVC > div.sc-7643a8e3-3.kvnEqz > div > div.sc-e1fa24b3-1.eydBag > div > a");
 
                                 var gety = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-80d4314-1.fbQftq > div > ul > li:nth-child(2) > a");
-                                //抓分數
-                                var getrate = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-db8c1937-0.eGmDjE.sc-80d4314-3.iBtAhY > div > div:nth-child(1) > a > div > div > div.sc-7ab21ed2-0.fAePGh > div.sc-7ab21ed2-2.kYEdvH > span.sc-7ab21ed2-1.jGRxWM");
-                                string kk = getrate.InnerHtml;
-                                decimal ratestar = Math.Round((Convert.ToDecimal(kk) / 2), 1);
                                 //沒有原標(沒有中標)
                                 if (titleen == null)
                                 {
@@ -100,13 +94,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -119,13 +113,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -143,12 +137,12 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -161,13 +155,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -195,13 +189,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -214,13 +208,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -237,13 +231,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -262,13 +256,13 @@ namespace spider
                                                 if (data2 != null)
                                                 {
                                                     string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                    get(b, chtitle, entitle, time, runyear, ratestar);
+                                                    get(b, chtitle, entitle, time, runyear);
                                                 }
 
                                                 else if (data0 != null)
                                                 {
                                                     string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                    get(b, chtitle, entitle, time, runyear, ratestar);
+                                                    get(b, chtitle, entitle, time, runyear);
                                                 }
                                                 else if (data2 == null && data0 == null)
                                                     textBox1.Text = chtitle + "沒有圖片";
@@ -282,13 +276,13 @@ namespace spider
                                                     if (data2 != null)
                                                     {
                                                         string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear, ratestar);
+                                                        get(b, chtitle, entitle, time, runyear);
                                                     }
 
                                                     else if (data0 != null)
                                                     {
                                                         string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear, ratestar);
+                                                        get(b, chtitle, entitle, time, runyear);
                                                     }
                                                     else if (data2 == null && data0 == null)
                                                         textBox1.Text = chtitle + "沒有圖片";
@@ -300,13 +294,13 @@ namespace spider
                                                     if (data2 != null)
                                                     {
                                                         string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear, ratestar);
+                                                        get(b, chtitle, entitle, time, runyear);
                                                     }
 
                                                     else if (data0 != null)
                                                     {
                                                         string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear,ratestar);
+                                                        get(b, chtitle, entitle, time, runyear);
                                                     }
                                                     else if (data2 == null && data0 == null)
                                                         textBox1.Text = chtitle + "沒有圖片";
@@ -328,7 +322,8 @@ namespace spider
                 }
             }
         }
-        private async void get(string b, string chtitle, string entitle, int time, int runyear, decimal ratestar)
+
+        private async void get(string b, string chtitle, string entitle, int time, int runyear)
         {
             using (HttpClient client3 = new HttpClient())
             {
@@ -359,18 +354,18 @@ namespace spider
                         else
 
                             textBox2.Text += chtitle + "圖片已存過";
-                        if (q2.Count() == 0 )
+                        if (q2.Count() == 0)
                         {
                             if (q3.Count() != 0 || q4.Count() != 0)
                             {
                                 MessageBox.Show(chtitle + "/" + entitle + "可能已加入");
                                 return;
                             }
+
                             P.中文標題Title_Cht = chtitle;
                             P.英文標題Title_Eng = entitle;
                             P.片長Runtime = time;
                             P.上映年份Release_Year = runyear;
-                            P.評分Rate = ratestar;
 
                             this.database.電影Movies.Add(P);
                             this.database.SaveChanges();
@@ -396,18 +391,18 @@ namespace spider
                         else
 
                             textBox2.Text += chtitle + "圖片已存過";
-                        if (q2.Count() == 0 )
+                        if (q2.Count() == 0)
                         {
                             if (q3.Count() != 0 || q4.Count() != 0)
                             {
                                 MessageBox.Show(chtitle + "/" + entitle + "可能已加入");
                                 return;
                             }
+
                             P.中文標題Title_Cht = chtitle;
                             P.英文標題Title_Eng = entitle;
                             P.片長Runtime = time;
                             P.上映年份Release_Year = runyear;
-                            P.評分Rate = ratestar;
 
                             this.database.電影Movies.Add(P);
                             this.database.SaveChanges();
