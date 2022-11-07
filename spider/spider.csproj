@@ -164,6 +164,12 @@
     <Compile Include="電影圖片總表MovieImages.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="電影圖片連.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="電影圖片連.Designer.cs">
+      <DependentUpon>電影圖片連.cs</DependentUpon>
+    </Compile>
     <Compile Include="電影導演MovieDirector.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -199,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="最低評分.resx">
       <DependentUpon>最低評分.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="電影圖片連.resx">
+      <DependentUpon>電影圖片連.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
