@@ -18,6 +18,7 @@ namespace spider
         public 電影Movies()
         {
             this.電影圖片MovieIImagesList = new HashSet<電影圖片MovieIImagesList>();
+            this.電影導演MovieDirector = new HashSet<電影導演MovieDirector>();
         }
     
         public int 電影編號Movie_ID { get; set; }
@@ -36,5 +37,7 @@ namespace spider
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<電影圖片MovieIImagesList> 電影圖片MovieIImagesList { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<電影導演MovieDirector> 電影導演MovieDirector { get; set; }
     }
 }

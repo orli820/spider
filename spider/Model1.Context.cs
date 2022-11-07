@@ -29,5 +29,7 @@ namespace spider
         public virtual DbSet<電影Movies> 電影Movies { get; set; }
         public virtual DbSet<電影排行MovieRank> 電影排行MovieRank { get; set; }
         public virtual DbSet<電影圖片MovieIImagesList> 電影圖片MovieIImagesList { get; set; }
+        public virtual DbSet<電影導演MovieDirector> 電影導演MovieDirector { get; set; }
+        public virtual DbSet<導演總表Director> 導演總表Director { get; set; }
     }
 }

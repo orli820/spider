@@ -55,6 +55,23 @@
           <Property Name="電影名稱MovieName" Type="nvarchar" MaxLength="100" />
           <Property Name="屏蔽Invisible" Type="int" />
         </EntityType>
+        <EntityType Name="電影導演MovieDirector">
+          <Key>
+            <PropertyRef Name="電影導演編號MD_ID" />
+          </Key>
+          <Property Name="電影導演編號MD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="電影編號Movie_ID" Type="int" Nullable="false" />
+          <Property Name="導演編號Director_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="導演總表Director">
+          <Key>
+            <PropertyRef Name="導演編號Director_ID" />
+          </Key>
+          <Property Name="導演編號Director_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="導演中文名字Name_Cht" Type="nvarchar" MaxLength="50" />
+          <Property Name="導演英文名字Name_Eng" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="導演照片Image" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <Association Name="FK_電影圖片MovieIImages_圖片總表Images">
           <End Role="電影圖片總表MovieImages" Type="Self.電影圖片總表MovieImages" Multiplicity="1" />
           <End Role="電影圖片MovieIImagesList" Type="Self.電影圖片MovieIImagesList" Multiplicity="*" />
@@ -79,11 +96,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_電影導演 Movie_Director_導演總表 Director">
+          <End Role="導演總表Director" Type="Self.導演總表Director" Multiplicity="1" />
+          <End Role="電影導演MovieDirector" Type="Self.電影導演MovieDirector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="導演總表Director">
+              <PropertyRef Name="導演編號Director_ID" />
+            </Principal>
+            <Dependent Role="電影導演MovieDirector">
+              <PropertyRef Name="導演編號Director_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_電影導演MovieDirector_電影Movies">
+          <End Role="電影Movies" Type="Self.電影Movies" Multiplicity="1" />
+          <End Role="電影導演MovieDirector" Type="Self.電影導演MovieDirector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="電影Movies">
+              <PropertyRef Name="電影編號Movie_ID" />
+            </Principal>
+            <Dependent Role="電影導演MovieDirector">
+              <PropertyRef Name="電影編號Movie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MDAModelStoreContainer">
           <EntitySet Name="電影Movies" EntityType="Self.電影Movies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="電影排行MovieRank" EntityType="Self.電影排行MovieRank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="電影圖片MovieIImagesList" EntityType="Self.電影圖片MovieIImagesList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="電影圖片總表MovieImages" EntityType="Self.電影圖片總表MovieImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="電影導演MovieDirector" EntityType="Self.電影導演MovieDirector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="導演總表Director" EntityType="Self.導演總表Director" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_電影圖片MovieIImages_圖片總表Images" Association="Self.FK_電影圖片MovieIImages_圖片總表Images">
             <End Role="電影圖片總表MovieImages" EntitySet="電影圖片總表MovieImages" />
             <End Role="電影圖片MovieIImagesList" EntitySet="電影圖片MovieIImagesList" />
@@ -91,6 +134,14 @@
           <AssociationSet Name="FK_電影圖片MovieIImagesList_電影Movies" Association="Self.FK_電影圖片MovieIImagesList_電影Movies">
             <End Role="電影Movies" EntitySet="電影Movies" />
             <End Role="電影圖片MovieIImagesList" EntitySet="電影圖片MovieIImagesList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_電影導演 Movie_Director_導演總表 Director" Association="Self.FK_電影導演 Movie_Director_導演總表 Director">
+            <End Role="導演總表Director" EntitySet="導演總表Director" />
+            <End Role="電影導演MovieDirector" EntitySet="電影導演MovieDirector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_電影導演MovieDirector_電影Movies" Association="Self.FK_電影導演MovieDirector_電影Movies">
+            <End Role="電影Movies" EntitySet="電影Movies" />
+            <End Role="電影導演MovieDirector" EntitySet="電影導演MovieDirector" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -109,6 +160,16 @@
           <AssociationSet Name="FK_電影圖片MovieIImages_圖片總表Images" Association="MDAModel.FK_電影圖片MovieIImages_圖片總表Images">
             <End Role="電影圖片總表MovieImages" EntitySet="電影圖片總表MovieImages" />
             <End Role="電影圖片MovieIImagesList" EntitySet="電影圖片MovieIImagesList" />
+          </AssociationSet>
+          <EntitySet Name="電影導演MovieDirector" EntityType="MDAModel.電影導演MovieDirector" />
+          <EntitySet Name="導演總表Director" EntityType="MDAModel.導演總表Director" />
+          <AssociationSet Name="FK_電影導演MovieDirector_電影Movies" Association="MDAModel.FK_電影導演MovieDirector_電影Movies">
+            <End Role="電影Movies" EntitySet="電影Movies" />
+            <End Role="電影導演MovieDirector" EntitySet="電影導演MovieDirector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_電影導演_Movie_Director_導演總表_Director" Association="MDAModel.FK_電影導演_Movie_Director_導演總表_Director">
+            <End Role="導演總表Director" EntitySet="導演總表Director" />
+            <End Role="電影導演MovieDirector" EntitySet="電影導演MovieDirector" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="電影圖片總表MovieImages">
@@ -141,6 +202,7 @@
           <Property Name="劇情大綱Plot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="預告片Trailer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="電影圖片MovieIImagesList" Relationship="MDAModel.FK_電影圖片MovieIImagesList_電影Movies" FromRole="電影Movies" ToRole="電影圖片MovieIImagesList" />
+          <NavigationProperty Name="電影導演MovieDirector" Relationship="MDAModel.FK_電影導演MovieDirector_電影Movies" FromRole="電影Movies" ToRole="電影導演MovieDirector" />
         </EntityType>
         <EntityType Name="電影排行MovieRank">
           <Key>
@@ -186,6 +248,50 @@
             </Principal>
             <Dependent Role="電影圖片MovieIImagesList">
               <PropertyRef Name="圖片編號Image_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="電影導演MovieDirector">
+          <Key>
+            <PropertyRef Name="電影導演編號MD_ID" />
+          </Key>
+          <Property Name="電影導演編號MD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="電影編號Movie_ID" Type="Int32" Nullable="false" />
+          <Property Name="導演編號Director_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="電影Movies" Relationship="MDAModel.FK_電影導演MovieDirector_電影Movies" FromRole="電影導演MovieDirector" ToRole="電影Movies" />
+          <NavigationProperty Name="導演總表Director" Relationship="MDAModel.FK_電影導演_Movie_Director_導演總表_Director" FromRole="電影導演MovieDirector" ToRole="導演總表Director" />
+        </EntityType>
+        <EntityType Name="導演總表Director">
+          <Key>
+            <PropertyRef Name="導演編號Director_ID" />
+          </Key>
+          <Property Name="導演編號Director_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="導演中文名字Name_Cht" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="導演英文名字Name_Eng" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="導演照片Image" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="電影導演MovieDirector" Relationship="MDAModel.FK_電影導演_Movie_Director_導演總表_Director" FromRole="導演總表Director" ToRole="電影導演MovieDirector" />
+        </EntityType>
+        <Association Name="FK_電影導演MovieDirector_電影Movies">
+          <End Type="MDAModel.電影Movies" Role="電影Movies" Multiplicity="1" />
+          <End Type="MDAModel.電影導演MovieDirector" Role="電影導演MovieDirector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="電影Movies">
+              <PropertyRef Name="電影編號Movie_ID" />
+            </Principal>
+            <Dependent Role="電影導演MovieDirector">
+              <PropertyRef Name="電影編號Movie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_電影導演_Movie_Director_導演總表_Director">
+          <End Type="MDAModel.導演總表Director" Role="導演總表Director" Multiplicity="1" />
+          <End Type="MDAModel.電影導演MovieDirector" Role="電影導演MovieDirector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="導演總表Director">
+              <PropertyRef Name="導演編號Director_ID" />
+            </Principal>
+            <Dependent Role="電影導演MovieDirector">
+              <PropertyRef Name="導演編號Director_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -246,6 +352,25 @@
                 <ScalarProperty Name="圖片編號Image_ID" ColumnName="圖片編號Image_ID" />
                 <ScalarProperty Name="電影編號Movie_ID" ColumnName="電影編號Movie_ID" />
                 <ScalarProperty Name="電影圖片編號MI_ID" ColumnName="電影圖片編號MI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="電影導演MovieDirector">
+            <EntityTypeMapping TypeName="MDAModel.電影導演MovieDirector">
+              <MappingFragment StoreEntitySet="電影導演MovieDirector">
+                <ScalarProperty Name="導演編號Director_ID" ColumnName="導演編號Director_ID" />
+                <ScalarProperty Name="電影編號Movie_ID" ColumnName="電影編號Movie_ID" />
+                <ScalarProperty Name="電影導演編號MD_ID" ColumnName="電影導演編號MD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="導演總表Director">
+            <EntityTypeMapping TypeName="MDAModel.導演總表Director">
+              <MappingFragment StoreEntitySet="導演總表Director">
+                <ScalarProperty Name="導演照片Image" ColumnName="導演照片Image" />
+                <ScalarProperty Name="導演英文名字Name_Eng" ColumnName="導演英文名字Name_Eng" />
+                <ScalarProperty Name="導演中文名字Name_Cht" ColumnName="導演中文名字Name_Cht" />
+                <ScalarProperty Name="導演編號Director_ID" ColumnName="導演編號Director_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -23,6 +23,8 @@ namespace spider
         電影Movies P = new 電影Movies();
         電影圖片總表MovieImages R = new 電影圖片總表MovieImages();
         電影圖片MovieIImagesList R2 = new 電影圖片MovieIImagesList();
+        電影導演MovieDirector D2 = new 電影導演MovieDirector();
+        導演總表Director D = new 導演總表Director();
 
         private async void button1_Click(object sender, EventArgs e)
         {
@@ -84,6 +86,11 @@ namespace spider
                                 var getrate = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-db8c1937-0.eGmDjE.sc-80d4314-3.iBtAhY > div > div:nth-child(1) > a > div > div > div.sc-7ab21ed2-0.fAePGh > div.sc-7ab21ed2-2.kYEdvH > span.sc-7ab21ed2-1.jGRxWM");
                                 string kk = getrate.InnerHtml;
                                 decimal ratestar = Math.Round((Convert.ToDecimal(kk) / 2), 1);
+
+                                //找導演
+                                var dddddd = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-7643a8e3-2.ebKPVC > div.sc-7643a8e3-10.itwFpV > div.sc-7643a8e3-4.iAthmE > div.sc-fa02f843-0.fjLeDR > ul > li:nth-child(1) > div > ul > li > a");
+                                string director = dddddd.InnerHtml;
+
                                 //沒有原標(沒有中標)
                                 if (titleen == null)
                                 {
@@ -100,13 +107,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -119,13 +126,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -143,12 +150,12 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -161,13 +168,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -195,13 +202,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -214,13 +221,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -237,13 +244,13 @@ namespace spider
                                             if (data2 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
 
                                             else if (data0 != null)
                                             {
                                                 string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear, ratestar);
+                                                get(b, chtitle, entitle, time, runyear, ratestar, director);
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -262,13 +269,13 @@ namespace spider
                                                 if (data2 != null)
                                                 {
                                                     string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                    get(b, chtitle, entitle, time, runyear, ratestar);
+                                                    get(b, chtitle, entitle, time, runyear, ratestar, director);
                                                 }
 
                                                 else if (data0 != null)
                                                 {
                                                     string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                    get(b, chtitle, entitle, time, runyear, ratestar);
+                                                    get(b, chtitle, entitle, time, runyear, ratestar, director);
                                                 }
                                                 else if (data2 == null && data0 == null)
                                                     textBox1.Text = chtitle + "沒有圖片";
@@ -282,13 +289,13 @@ namespace spider
                                                     if (data2 != null)
                                                     {
                                                         string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear, ratestar);
+                                                        get(b, chtitle, entitle, time, runyear, ratestar, director);
                                                     }
 
                                                     else if (data0 != null)
                                                     {
                                                         string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear, ratestar);
+                                                        get(b, chtitle, entitle, time, runyear, ratestar, director);
                                                     }
                                                     else if (data2 == null && data0 == null)
                                                         textBox1.Text = chtitle + "沒有圖片";
@@ -300,13 +307,13 @@ namespace spider
                                                     if (data2 != null)
                                                     {
                                                         string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear, ratestar);
+                                                        get(b, chtitle, entitle, time, runyear, ratestar, director);
                                                     }
 
                                                     else if (data0 != null)
                                                     {
                                                         string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear,ratestar);
+                                                        get(b, chtitle, entitle, time, runyear,ratestar, director);
                                                     }
                                                     else if (data2 == null && data0 == null)
                                                         textBox1.Text = chtitle + "沒有圖片";
@@ -328,7 +335,7 @@ namespace spider
                 }
             }
         }
-        private async void get(string b, string chtitle, string entitle, int time, int runyear, decimal ratestar)
+        private async void get(string b, string chtitle, string entitle, int time, int runyear, decimal ratestar,string director)
         {
             using (HttpClient client3 = new HttpClient())
             {
@@ -346,10 +353,12 @@ namespace spider
                     {
                         string c = data3.GetAttribute("src");
                         var q = from a in database.電影圖片總表MovieImages where a.圖片雲端ImageIMDB == c select a;
+                        var q5 = from d in database.電影圖片總表MovieImages where d.圖片雲端ImageIMDB == c select d;
                         var q2 = from z in database.電影Movies where z.中文標題Title_Cht == chtitle select z;
                         var q3 = from d in database.電影Movies where d.中文標題Title_Cht == entitle select d;
                         var q4 = from f in database.電影Movies where f.英文標題Title_Eng == entitle select f;
-                        if (q.Count() == 0)
+                        var q6 = from m in database.導演總表Director where m.導演英文名字Name_Eng == director select m;
+                        if (q.Count() == 0 && q5.Count() == 0)
                         {
                             R.圖片雲端ImageIMDB = c;
                             R.電影名稱MovieName = chtitle;
@@ -371,9 +380,9 @@ namespace spider
                             P.片長Runtime = time;
                             P.上映年份Release_Year = runyear;
                             P.評分Rate = ratestar;
-
                             this.database.電影Movies.Add(P);
                             this.database.SaveChanges();
+                            textBox1.Text += chtitle + "已存入";
 
                             var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
                             var img = (from a1 in database.電影圖片總表MovieImages where a1.圖片雲端ImageIMDB == c select a1.圖片編號Image_ID).First();
@@ -381,19 +390,67 @@ namespace spider
                             R2.電影編號Movie_ID = movie;
                             this.database.電影圖片MovieIImagesList.Add(R2);
                             this.database.SaveChanges();
+                            textBox1.Text += "電影圖片加入成功";
+
+                            if (q6.Count() == 0)
+                            {
+
+                                D.導演英文名字Name_Eng = director;
+                                this.database.導演總表Director.Add(D);
+                                this.database.SaveChanges();
+
+                                var j = (from d in database.導演總表Director where d.導演英文名字Name_Eng == director select d.導演編號Director_ID).First();
+                                D2.導演編號Director_ID = j;
+                                D2.電影編號Movie_ID = movie;
+                                this.database.電影導演MovieDirector.Add(D2);
+                                this.database.SaveChanges();
+                            }
+                            else if (q6.Count() != 0)
+                            {
+                                var p = (from i in q6 select i.導演編號Director_ID).First();
+                                D2.導演編號Director_ID = p;
+                                D2.電影編號Movie_ID = movie;
+                                this.database.電影導演MovieDirector.Add(D2);
+                                this.database.SaveChanges();
+                            }
                         }
                         else
 
                             textBox2.Text += chtitle + "電影已存過";
+                        if (q6.Count() == 0)
+                        {
+
+                            D.導演英文名字Name_Eng = director;
+                            this.database.導演總表Director.Add(D);
+                            this.database.SaveChanges();
+
+                            var j = (from d in database.導演總表Director where d.導演英文名字Name_Eng == director select d.導演編號Director_ID).First();
+                            var jj = (from i in q2 select i.電影編號Movie_ID).First();
+                            D2.導演編號Director_ID = j;
+                            D2.電影編號Movie_ID = jj;
+                            this.database.電影導演MovieDirector.Add(D2);
+                            this.database.SaveChanges();
+                        }
+                        else if (q6.Count() != 0)
+                        {
+                            var p = (from i in q6 select i.導演編號Director_ID).First();
+                            D2.導演編號Director_ID = p;
+                            var jj = (from i in q2 select i.電影編號Movie_ID).First();
+                            D2.電影編號Movie_ID = jj;
+                            this.database.電影導演MovieDirector.Add(D2);
+                            this.database.SaveChanges();
+                        }
                     }
                     else
                     {
                         string c = data4.GetAttribute("src");
                         var q = from a in database.電影圖片總表MovieImages where a.圖片雲端ImageIMDB == c select a;
+                        var q5 = from d in database.電影圖片總表MovieImages where d.圖片雲端ImageIMDB == c select d;
                         var q2 = from z in database.電影Movies where z.中文標題Title_Cht == chtitle select z;
                         var q3 = from d in database.電影Movies where d.中文標題Title_Cht == entitle select d;
                         var q4 = from f in database.電影Movies where f.英文標題Title_Eng == entitle select f;
-                        if (q.Count() == 0)
+                        var q6 = from m in database.導演總表Director where m.導演英文名字Name_Eng == director select m;
+                        if (q.Count() == 0 && q5.Count() == 0)
                         {
                             R.圖片雲端ImageIMDB = c;
                             R.電影名稱MovieName = chtitle;
@@ -418,16 +475,64 @@ namespace spider
 
                             this.database.電影Movies.Add(P);
                             this.database.SaveChanges();
-                            var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
+                            textBox1.Text += chtitle + "已存入";
+
+                           var movie = (from a in database.電影Movies where a.中文標題Title_Cht == chtitle select a.電影編號Movie_ID).First();
                             var img = (from a1 in database.電影圖片總表MovieImages where a1.圖片雲端ImageIMDB == c select a1.圖片編號Image_ID).First();
                             R2.圖片編號Image_ID = img;
                             R2.電影編號Movie_ID = movie;
                             this.database.電影圖片MovieIImagesList.Add(R2);
                             this.database.SaveChanges();
+                            textBox1.Text += "電影圖片加入成功";
+
+                            if (q6.Count() == 0)
+                            {
+
+                                D.導演英文名字Name_Eng = director;
+                                this.database.導演總表Director.Add(D);
+                                this.database.SaveChanges();
+
+                                var j = (from d in database.導演總表Director where d.導演英文名字Name_Eng == director select d.導演編號Director_ID).First();
+                                D2.導演編號Director_ID = j;
+                                D2.電影編號Movie_ID = movie;
+                                this.database.電影導演MovieDirector.Add(D2);
+                                this.database.SaveChanges();
+                            }
+                            else if (q6.Count() != 0)
+                            {
+                                var p = (from i in q6 select i.導演編號Director_ID).First();
+                                D2.導演編號Director_ID = p;
+                                D2.電影編號Movie_ID = movie;
+                                this.database.電影導演MovieDirector.Add(D2);
+                                this.database.SaveChanges();
+                            }
                         }
                         else
-
                             textBox2.Text += chtitle + "電影已存過";
+                        if (q6.Count() == 0)
+                        {
+
+                            D.導演英文名字Name_Eng = director;
+                            this.database.導演總表Director.Add(D);
+                            this.database.SaveChanges();
+
+                            var j = (from d in database.導演總表Director where d.導演英文名字Name_Eng == director select d.導演編號Director_ID).First();
+                            var jj = (from i in q2 select i.電影編號Movie_ID).First();
+                            D2.導演編號Director_ID = j;
+                            D2.電影編號Movie_ID = jj;
+                            this.database.電影導演MovieDirector.Add(D2);
+                            this.database.SaveChanges();
+                        }
+                        else if (q6.Count() != 0)
+                        {
+                            var p = (from i in q6 select i.導演編號Director_ID).First();
+                            D2.導演編號Director_ID = p;
+                            var jj = (from i in q2 select i.電影編號Movie_ID).First();
+                            D2.電影編號Movie_ID = jj;
+                            this.database.電影導演MovieDirector.Add(D2);
+                            this.database.SaveChanges();
+                        }
+                        
                     }
 
 

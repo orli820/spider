@@ -11,6 +11,10 @@
         <EntityTypeShape EntityType="MDAModel.電影圖片MovieIImagesList" Width="1.5" PointX="8.5" PointY="1.5" />
         <AssociationConnector Association="MDAModel.FK_電影圖片MovieIImagesList_電影Movies" />
         <AssociationConnector Association="MDAModel.FK_電影圖片MovieIImages_圖片總表Images" />
+        <EntityTypeShape EntityType="MDAModel.電影導演MovieDirector" Width="1.5" PointX="8.375" PointY="4.875" />
+        <EntityTypeShape EntityType="MDAModel.導演總表Director" Width="1.5" PointX="6.125" PointY="5.875" />
+        <AssociationConnector Association="MDAModel.FK_電影導演MovieDirector_電影Movies" />
+        <AssociationConnector Association="MDAModel.FK_電影導演_Movie_Director_導演總表_Director" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

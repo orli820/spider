@@ -73,7 +73,7 @@ namespace spider
             this.Controls.Add(this.button1);
             this.Name = "Form4";
             this.Text = "抓即將上映電影";
-            this.Load += new System.EventHandler(this.Form4_Load);
+            //this.Load += new System.EventHandler(this.Form4_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

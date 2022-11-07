@@ -21,7 +21,9 @@ namespace spider
         MDAEntities1 database = new MDAEntities1();
         電影Movies P = new 電影Movies();
         電影圖片總表MovieImages R = new 電影圖片總表MovieImages();
-        
+        電影圖片MovieIImagesList R2 = new 電影圖片MovieIImagesList();
+        電影導演MovieDirector D2 = new 電影導演MovieDirector();
+        導演總表Director D = new 導演總表Director();
 
         private async void button1_Click(object sender, EventArgs e)
         {
@@ -30,7 +32,7 @@ namespace spider
                 string url = "https://www.imdb.com/calendar/?ref_=rlm&region=TW&type=MOVIE";
                 List<string> list = new List<string>();
                 List<string> listtitlech = new List<string>();
-
+                List<string> listactor = new List<string>();
                 var responseMessage = await client.GetAsync(url);
                 if (responseMessage.IsSuccessStatusCode)
                 {
@@ -39,7 +41,6 @@ namespace spider
                     HtmlParser parser = new HtmlParser();
                     var document = parser.ParseDocument(result);
                     var data = document.QuerySelectorAll("#__next > main > div > div.ipc-page-content-container.ipc-page-content-container--center > section > section > article > ul > li> div.ipc-metadata-list-summary-item__c > div.ipc-metadata-list-summary-item__tc > a");
-
 
                     foreach (var item in data)
                     {
@@ -80,6 +81,11 @@ namespace spider
                                 var data00 = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-7643a8e3-2.ebKPVC > div.sc-7643a8e3-3.kvnEqz > div > div.sc-e1fa24b3-1.eydBag > div > a");
 
                                 var gety = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-80d4314-0.fjPRnj > div.sc-80d4314-1.fbQftq > div > ul > li:nth-child(2) > a");
+                                //找導演
+                                var dddddd = document2.QuerySelector("#__next > main > div > section.ipc-page-background.ipc-page-background--base.sc-9b716f3b-0.hWwhTB > section > div:nth-child(4) > section > section > div.sc-7643a8e3-2.ebKPVC > div.sc-7643a8e3-10.itwFpV > div.sc-7643a8e3-4.iAthmE > div.sc-fa02f843-0.fjLeDR > ul > li:nth-child(1) > div > ul > li > a");
+
+
+
                                 //沒有原標(沒有中標)
                                 if (titleen == null)
                                 {
@@ -95,18 +101,39 @@ namespace spider
                                             int time = h;
                                             if (data2 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+
                                             }
 
                                             else if (data0 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
-                                            
+
 
                                         }
                                         else
@@ -114,17 +141,37 @@ namespace spider
                                             int time = h + Convert.ToInt32(gettime[6]);
                                             if (data2 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
 
                                             else if (data0 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
                                             else if (data2 == null && data0 == null)
-                                                textBox1.Text = chtitle + "沒有圖片";    
+                                                textBox1.Text = chtitle + "沒有圖片";
                                         }
                                     }
                                     //抓片長第二格
@@ -138,17 +185,37 @@ namespace spider
                                             int time = h;
                                             if (data2 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
                                             else if (data0 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
-                                           
+
 
                                         }
                                         else
@@ -156,14 +223,34 @@ namespace spider
                                             int time = h + Convert.ToInt32(gettime[6]);
                                             if (data2 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
 
                                             else if (data0 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -190,14 +277,34 @@ namespace spider
                                             int time = h;
                                             if (data2 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
 
                                             else if (data0 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -209,14 +316,35 @@ namespace spider
                                             int time = h + Convert.ToInt32(gettime[6]);
                                             if (data2 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
 
                                             else if (data0 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -232,14 +360,35 @@ namespace spider
                                             int time = h;
                                             if (data2 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
 
                                             else if (data0 != null)
                                             {
-                                                string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                get(b, chtitle, entitle, time, runyear);
+                                                if (dddddd == null)
+                                                {
+
+                                                    string director = "YouNeedToKeyInByYourself";
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
+                                                else if (dddddd != null)
+                                                {
+                                                    string director = dddddd.InnerHtml;
+                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                    get(b, chtitle, entitle, time, runyear, director);
+                                                }
                                             }
                                             else if (data2 == null && data0 == null)
                                                 textBox1.Text = chtitle + "沒有圖片";
@@ -251,40 +400,82 @@ namespace spider
                                         {
                                             string time1 = runningtime2.InnerHtml;
                                             string[] gettime = time1.Split('<', '>');
-                                            if (gettime[2]=="PG")
+                                            if (gettime[2] == "PG")
                                             {
                                                 int h = 0;
                                                 int time = h;
                                                 if (data2 != null)
                                                 {
-                                                    string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                    get(b, chtitle, entitle, time, runyear);
+                                                    if (dddddd == null)
+                                                    {
+                                                        string director = "YouNeedToKeyInByYourself";
+                                                        string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                        get(b, chtitle, entitle, time, runyear, director);
+                                                    }
+                                                    else if (dddddd != null)
+                                                    {
+                                                        string director = "YouNeedToKeyInByYourself";
+                                                        string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                        get(b, chtitle, entitle, time, runyear, director);
+                                                    }
                                                 }
 
                                                 else if (data0 != null)
                                                 {
-                                                    string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                    get(b, chtitle, entitle, time, runyear);
+                                                    if (dddddd == null)
+                                                    {
+
+                                                        string director = "YouNeedToKeyInByYourself";
+                                                        string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                        get(b, chtitle, entitle, time, runyear, director);
+                                                    }
+                                                    else if (dddddd != null)
+                                                    {
+                                                        string director = dddddd.InnerHtml;
+                                                        string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                        get(b, chtitle, entitle, time, runyear, director);
+                                                    }
                                                 }
                                                 else if (data2 == null && data0 == null)
                                                     textBox1.Text = chtitle + "沒有圖片";
                                             }
                                             else
                                             {
-                                               int h = Convert.ToInt32(gettime[0]) * 60;
+                                                int h = Convert.ToInt32(gettime[0]) * 60;
                                                 if (gettime.Length != 9)
                                                 {
                                                     int time = h;
                                                     if (data2 != null)
                                                     {
-                                                        string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear);
+                                                        if (dddddd == null)
+                                                        {
+                                                            string director = "YouNeedToKeyInByYourself";
+                                                            string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                            get(b, chtitle, entitle, time, runyear, director);
+                                                        }
+                                                        else if (dddddd != null)
+                                                        {
+                                                            string director = dddddd.InnerHtml;
+                                                            string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                            get(b, chtitle, entitle, time, runyear, director);
+                                                        }
                                                     }
 
                                                     else if (data0 != null)
                                                     {
-                                                        string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear);
+                                                        if (dddddd == null)
+                                                        {
+
+                                                            string director = "YouNeedToKeyInByYourself";
+                                                            string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                            get(b, chtitle, entitle, time, runyear, director);
+                                                        }
+                                                        else if (dddddd != null)
+                                                        {
+                                                            string director = dddddd.InnerHtml;
+                                                            string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                            get(b, chtitle, entitle, time, runyear, director);
+                                                        }
                                                     }
                                                     else if (data2 == null && data0 == null)
                                                         textBox1.Text = chtitle + "沒有圖片";
@@ -295,14 +486,35 @@ namespace spider
                                                     int time = h + Convert.ToInt32(gettime[6]);
                                                     if (data2 != null)
                                                     {
-                                                        string b = "https://www.imdb.com" + data2.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear);
+                                                        if (dddddd == null)
+                                                        {
+                                                            string director = "YouNeedToKeyInByYourself";
+                                                            string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                            get(b, chtitle, entitle, time, runyear, director);
+                                                        }
+                                                        else if (dddddd != null)
+                                                        {
+                                                            string director = dddddd.InnerHtml;
+                                                            string b = "https://www.imdb.com" + data2.GetAttribute("href");
+                                                            get(b, chtitle, entitle, time, runyear, director);
+                                                        }
                                                     }
 
                                                     else if (data0 != null)
                                                     {
-                                                        string b = "https://www.imdb.com" + data0.GetAttribute("href");
-                                                        get(b, chtitle, entitle, time, runyear);
+                                                        if (dddddd == null)
+                                                        {
+
+                                                            string director = "YouNeedToKeyInByYourself";
+                                                            string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                            get(b, chtitle, entitle, time, runyear, director);
+                                                        }
+                                                        else if (dddddd != null)
+                                                        {
+                                                            string director = dddddd.InnerHtml;
+                                                            string b = "https://www.imdb.com" + data0.GetAttribute("href");
+                                                            get(b, chtitle, entitle, time, runyear, director);
+                                                        }
                                                     }
                                                     else if (data2 == null && data0 == null)
                                                         textBox1.Text = chtitle + "沒有圖片";
@@ -327,7 +539,7 @@ namespace spider
 
 
 
-        private async void get(string b, string chtitle, string entitle, int time, int runyear)
+        private async void get(string b, string chtitle, string entitle, int time, int runyear, string director)
         {
             using (HttpClient client3 = new HttpClient())
             {
@@ -344,28 +556,32 @@ namespace spider
                     if (data3 != null)
                     {
                         string c = data3.GetAttribute("src");
-                        var q = from a in database.電影圖片總表MovieImages where a.圖片雲端ImageIMDB == c select a;
+                        var q = from a in database.電影圖片總表MovieImages where a.電影名稱MovieName == chtitle select a;
+                        var q5 = from d in database.電影圖片總表MovieImages where d.圖片雲端ImageIMDB == c select d;
                         var q2 = from z in database.電影Movies where z.中文標題Title_Cht == chtitle select z;
                         var q3 = from d in database.電影Movies where d.中文標題Title_Cht == entitle select d;
                         var q4 = from f in database.電影Movies where f.英文標題Title_Eng == entitle select f;
-                        if (q.Count() == 0)
+                        var q6 = from h in database.導演總表Director where h.導演英文名字Name_Eng == director select h;
+                        //加入圖片
+                        if (q.Count() == 0 && q5.Count() == 0)
                         {
                             R.圖片雲端ImageIMDB = c;
                             R.電影名稱MovieName = chtitle;
                             this.database.電影圖片總表MovieImages.Add(R);
                             this.database.SaveChanges();
+
                         }
                         else
-
                             textBox2.Text += chtitle + "圖片已存過";
-                        if (q2.Count() == 0 )
+                        //加入電影
+                        if (q2.Count() == 0)
                         {
                             if (q3.Count() != 0 || q4.Count() != 0)
                             {
                                 MessageBox.Show(chtitle + "/" + entitle + "可能已加入");
                                 return;
                             }
-                            
+
                             P.中文標題Title_Cht = chtitle;
                             P.英文標題Title_Eng = entitle;
                             P.片長Runtime = time;
@@ -373,18 +589,38 @@ namespace spider
 
                             this.database.電影Movies.Add(P);
                             this.database.SaveChanges();
+                            textBox1.Text += chtitle + "已存入";
                         }
                         else
-
+                        {
                             textBox2.Text += chtitle + "電影已存過";
+                        }
+
+                        ////電影圖片                       
+                        //var m = (from i in database.電影Movies where i.中文標題Title_Cht == chtitle select i.電影編號Movie_ID).First();
+                        //var p = (from i in database.電影圖片總表MovieImages where i.電影名稱MovieName == chtitle select i.圖片編號Image_ID).First();
+                        //var o = from i in database.電影圖片MovieIImagesList where i.圖片編號Image_ID == p select i;
+                        //if (o.Count() != 0)
+                        //{
+                        //    R2.圖片編號Image_ID = p;
+                        //    R2.電影編號Movie_ID = m;
+                        //    this.database.電影圖片MovieIImagesList.Add(R2);
+                        //    this.database.SaveChanges();
+                        //}
+                        //else
+                        //    textBox2.Text += chtitle + "電影圖片已存過";
                     }
                     else
                     {
                         string c = data4.GetAttribute("src");
                         var q = from a in database.電影圖片總表MovieImages where a.圖片雲端ImageIMDB == c select a;
+                        var q5 = from d in database.電影圖片總表MovieImages where d.圖片雲端ImageIMDB == c select d;
                         var q2 = from z in database.電影Movies where z.中文標題Title_Cht == chtitle select z;
+                        //var q7 = database.電影Movies.Where(p => p.中文標題Title_Cht == chtitle).First().電影編號Movie_ID; 
+
                         var q3 = from d in database.電影Movies where d.中文標題Title_Cht == entitle select d;
                         var q4 = from f in database.電影Movies where f.英文標題Title_Eng == entitle select f;
+                        var q6 = from u in database.導演總表Director where u.導演英文名字Name_Eng == director select u;
                         if (q.Count() == 0)
                         {
                             R.圖片雲端ImageIMDB = c;
@@ -393,37 +629,51 @@ namespace spider
                             this.database.SaveChanges();
                         }
                         else
-
                             textBox2.Text += chtitle + "圖片已存過";
-                        if (q2.Count() == 0 )
+
+                        if (q.Count() == 0 && q5.Count() == 0)
                         {
-                            if (q3.Count() != 0|| q4.Count()!=0)
+                            if (q3.Count() != 0 || q4.Count() != 0)
                             {
                                 MessageBox.Show(chtitle + "/" + entitle + "可能已加入");
                                 return;
                             }
-                            
-                                P.中文標題Title_Cht = chtitle;
+
+                            P.中文標題Title_Cht = chtitle;
                             P.英文標題Title_Eng = entitle;
                             P.片長Runtime = time;
                             P.上映年份Release_Year = runyear;
 
                             this.database.電影Movies.Add(P);
                             this.database.SaveChanges();
+                            textBox1.Text += chtitle + "已存入";
                         }
                         else
-
+                        {
                             textBox2.Text += chtitle + "電影已存過";
+                        }
+                        //電影圖片                       
+                        //    var m = (from i in database.電影Movies where i.中文標題Title_Cht == chtitle select i).First();
+                        //    var p = (from i in database.電影圖片總表MovieImages where i.電影名稱MovieName == chtitle select i.圖片編號Image_ID).First();
+                        //    var o = from i in database.電影圖片MovieIImagesList where i.圖片編號Image_ID == p select i;
+                        //    if (o.Count() != 0)
+                        //    {
+                        //        R2.圖片編號Image_ID = p;
+                        //        R2.電影編號Movie_ID = m.電影編號Movie_ID;
+                        //        this.database.電影圖片MovieIImagesList.Add(R2);
+                        //        this.database.SaveChanges();
+                        //    }
+                        //    else
+                        //        textBox2.Text += chtitle + "電影圖片已存過";
+
+                        //}
+
+
+
                     }
-
-
-
                 }
             }
-        }
 
-        private void Form4_Load(object sender, EventArgs e)
-        {
 
         }
     }
